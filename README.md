@@ -35,6 +35,6 @@ Projeto de PI da Fatec 2º Semestre
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=black"/>](https://www.linkedin.com/in/ludmila-chagas-273548187/)
 [<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white&color=black"/>](https://github.com/ludmila-chagas)
 
-* Rafael de Castro Costa Silva _______________
+* Rafael de Castro Costa Silva ________________
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=3d3d3d"/>](https://www.linkedin.com/in/rafaelcastrow/)
 [<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white&color=3d3d3d"/>](https://github.com/rafaelcastrow)
