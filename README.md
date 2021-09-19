@@ -76,11 +76,11 @@ Veja cada uma de nossas sprints para mais informações sobre o conteúdo do pro
 
 - [x] [Sprint 01](https://github.com/PhatomFatec/PI_Necto_Systems/blob/main/Sprints/Sprint01/README.md) ✔️
  <br><br>
-- [ ] [Sprint 02](https://github.com/PhatomFatec/Helena/tree/main/Sprint%2002)
+- [ ] [Sprint 02](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Sprints/Sprint02)
  <br><br>
-- [ ] [Sprint 03](https://github.com/PhatomFatec/Helena/tree/main/Sprint%2003)
+- [ ] [Sprint 03](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Sprints/Sprint03)
  <br><br>
-- [ ] [Sprint 04](https://github.com/PhatomFatec/Helena/tree/main/Sprint%2004)
+- [ ] [Sprint 04](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Sprints/Sprint04)
  <br><br>
 
 ---
