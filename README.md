@@ -29,7 +29,7 @@ O **desafio** consiste em apresentar para o cliente Necto Systems, uma solução
 
 ### 👨🏽‍🎓 Equipe Phantom
 
-* (DEV) Alberto Junior Scholz Castro _______________
+* (DEV) Alberto Junior Scholz Castro ____________________
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=1c1c1c" />](https://www.linkedin.com/in/alberto-s-castro-725471172/)
 [<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white&color=1c1c1c"/>](https://github.com/AlbertoScholz) 
 
@@ -37,27 +37,27 @@ O **desafio** consiste em apresentar para o cliente Necto Systems, uma solução
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=3d3d3d"/>](https://www.linkedin.com/in/felipe-faria-verderamis-3b9b10202/)
 [<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white&color=3d3d3d"/>](https://github.com/FelipeFariaVerde)
 
-* (DEV) Gabriel Jose Souza dos Santos _____________
+* (DEV) Gabriel Jose Souza dos Santos __________________
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=1c1c1c" />](https://www.linkedin.com/in/gabriel-santos-87922b170/)
 [<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white&color=1c1c1c"/>](https://github.com/gabrieljssantos)
 
-* (DEV) Igor Ribeiro Silva ___________________________
+* (DEV) Igor Ribeiro Silva ________________________________
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=3d3d3d"/>](https://www.linkedin.com/in/igor-ribeiro-8571a6210/)
 [<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white&color=3d3d3d"/>](https://github.com/IgorRibeiro-S)
 
-* (DEV) Lara Oliveira Leal ___________________________
+* (DEV) Lara Oliveira Leal ________________________________
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=1c1c1c"/>](https://www.linkedin.com/in/lara-leal-527b7020a/)
 [<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white&color=1c1c1c"/>](https://github.com/lara-leal)
 
-* (PO) Lucas Guiraldelli da Silva ___________________
+* (PO) Lucas Guiraldelli da Silva _________________________
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=3d3d3d"/>](https://www.linkedin.com/in/lucasguiraldelli/)
 [<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white&color=3d3d3d"/>](https://github.com/LucasGuiraldelli)
 
-* (DEV) Ludmila Mariana Chagas ___________________
+* (DEV) Ludmila Mariana Chagas ________________________
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=1c1c1c"/>](https://www.linkedin.com/in/ludmila-chagas-273548187/)
 [<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white&color=1c1c1c"/>](https://github.com/ludmila-chagas)
 
-* (DEV) Rafael de Castro Costa Silva ________________
+* (DEV) Rafael de Castro Costa Silva ____________________
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=3d3d3d"/>](https://www.linkedin.com/in/rafaelcastrow/)
 [<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white&color=3d3d3d"/>](https://github.com/rafaelcastrow)
 
