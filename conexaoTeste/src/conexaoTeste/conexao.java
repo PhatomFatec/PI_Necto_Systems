@@ -6,15 +6,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class conexao {
 	private Connection con;
-		
-	private static String url = "jdbc:postgresql://localhost:5432/";
-	private static String user = "postgres";
-	private static String pass = "admin";
+			
+	private static String url = " "; // "jdbc:postgresql://localhost:5432/";
+	private static String user = " "; // "postgres";
+	private static String pass = " "; // "34cas)*10";
+	
+	static Scanner sc = new Scanner(System.in);
 	
 	public conexao(String databaseName) {
+		
+		
+		
+		System.out.println("Digite seu login de conexão com o banco de dados nos respectivos campos ");
+		System.out.println("url: ");
+		String url = sc.next();
+		System.out.println("Usuário: ");
+		String user = sc.next();
+		System.out.println("Senha: ");
+		String pass = sc.next();
+		
 		try {
 			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection(url + databaseName, user, pass);
@@ -130,7 +144,7 @@ public class conexao {
 		System.out.println("Tempo ativo do banco: " + upTimeDataBase);
 		
 
-		
+		sc.close();
 		con.closeConnection();	
 	}
 }
