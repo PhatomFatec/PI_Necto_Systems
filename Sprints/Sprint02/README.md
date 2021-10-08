@@ -2,4 +2,4 @@
 **Situação:** 🚧 Processando - 10/10/2021 <br><br>
 
 ## 📋 Backlog da Sprint
-![image](https://user-images.githubusercontent.com/80851038/133915405-9877aef4-96e3-4013-8ccb-a3694efecced.png)
+![Capturar](https://user-images.githubusercontent.com/64923139/136629021-044411bc-d2a9-49df-be1c-974886657525.PNG)
