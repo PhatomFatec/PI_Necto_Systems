@@ -37,7 +37,7 @@
 - Vá até o caminho onde a pasta do projeto foi colocada e selecione ela.
 - Aberte o botão "Finish".
 ```
-[Ver em imagens](google.com)
+[Ver em imagens](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Instala%C3%A7%C3%A3o/img/ImportProject)
 
 4. Alterando o banco padrão
 ```
