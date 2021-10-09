@@ -93,6 +93,25 @@ Veja cada uma de nossas sprints para mais informações sobre o conteúdo do pro
 ---
 
 
+### 📋 Instalação
+
+[Abrir](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Instala%C3%A7%C3%A3o)
+
+---
+
+### 📋 Executando o programa
+```
+- Faça a conexão no pgAdmin.
+- Execute a aplicação pelo Eclipse.
+- Assim que executar o programa coloque a url de conexão, caso nao tenha alterado o padrão dela é : jdbc:postgresql://localhost:5432/
+- Aperte enter.
+- Agora coloque o login e aperte enter novamente.
+- Por fim coloque a senha do seu banco. (senha padrão: admin)
+```
+
+---
+
+
 📅 Cronograma
 | Eventos         | Início   | Fim      | Status |
 |-----------------|----------|----------|--------|
