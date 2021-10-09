@@ -25,7 +25,7 @@
 - Caso tenha executado com sucesso, deve retornar a mensagem "Query returned successfully".
 - Execute esse mesmo passo para todas as databases criadas em seu PostgreSQL.
 ```
-[Ver em imagens](google.com)
+[Ver em imagens](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Instala%C3%A7%C3%A3o/img/pg_stat_statements)
 
 
 3. Abrindo o projeto no Eclipse
