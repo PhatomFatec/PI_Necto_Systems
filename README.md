@@ -102,7 +102,7 @@ Veja cada uma de nossas sprints para mais informações sobre o conteúdo do pro
 ### 📋 Executando o programa
 ```
 - Faça a conexão no pgAdmin.
-- Execute a aplicação pelo Eclipse.
+- Abra e execute a aplicação pelo Eclipse.
 - Assim que executar o programa coloque a url de conexão, caso nao tenha alterado o padrão dela é : jdbc:postgresql://localhost:5432/
 - Aperte enter.
 - Agora coloque o login e aperte enter novamente.
