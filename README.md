@@ -76,7 +76,7 @@ Veja cada uma de nossas sprints para mais informações sobre o conteúdo do pro
 
 - [x] [Sprint 01](https://github.com/PhatomFatec/PI_Necto_Systems/blob/main/Sprints/Sprint01/README.md) ✔️
  <br><br>
-- [ ] [Sprint 02](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Sprints/Sprint02)
+- [x] [Sprint 02](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Sprints/Sprint02) ✔️
  <br><br>
 - [ ] [Sprint 03](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Sprints/Sprint03)
  <br><br>
@@ -117,7 +117,7 @@ Veja cada uma de nossas sprints para mais informações sobre o conteúdo do pro
 |-----------------|----------|----------|--------|
 | **Kick off**    | 18/08/21 |          |   ✔️   |
 | **Sprint 01**   | 19/08/21 | 19/09/21 |   ✔️   |
-| **Sprint 02**   | 20/09/21 | 10/10/21 |   ❌   |
+| **Sprint 02**   | 20/09/21 | 10/10/21 |   ✔️   |
 | **Sprint 03**   | 18/10/21 | 07/11/21 |   ❌   |
 | **Sprint 04**   | 08/11/21 | 28/11/21 |   ❌   |
 | **Apresentação final** | 29/11/21 | 05/12/21 |   ❌   |
