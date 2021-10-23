@@ -1,0 +1,4 @@
+
+jdbc:postgresql://localhost:5432/
+postgres
+34cas)*10

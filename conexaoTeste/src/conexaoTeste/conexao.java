@@ -1,10 +1,14 @@
 package conexaoTeste;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -14,11 +18,36 @@ public class conexao {
 	
 	static Scanner sc = new Scanner(System.in);
 
-	private static String url = sc.next(); // "  jdbc:postgresql://localhost:5432/  ";
+	/* private static String url = sc.next(); // "  jdbc:postgresql://localhost:5432/ ";
    	private static String user = sc.next(); // "postgres";
-    	private static String pass = sc.next(); // "phantom02s";
+    private static String pass = sc.next(); // "34cas)*10"; */
 	
 	public conexao(String databaseName) {
+		
+ArrayList<String> login = new ArrayList<String>();
+		
+		String path = "login.txt";
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(path))){
+			String line = br.readLine();
+			
+			while (line != null) {
+				//System.out.println(line);
+				line = br.readLine();
+				login.add(line);
+			}
+		} catch (IOException e) {
+			System.out.println("Erro: " + e);
+		}
+
+		//System.out.println(login);
+		
+		String url = login.get(0);
+		String user = login.get(1);
+		String pass = login.get(2);
+		
+		//System.out.println(url + user + pass);
+		
 		
 		try {
 			Class.forName("org.postgresql.Driver");
