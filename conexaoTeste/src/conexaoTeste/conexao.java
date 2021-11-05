@@ -294,8 +294,35 @@ public class conexao {
 
 	// Criação dos CSVs
 	
+	public static void Writecsv_dbaSize(HashMap<String, String> databasesSize) {
+		
+		    try (PrintWriter writer = new PrintWriter(new File("DatabaseSize.csv"))) {
+
+		        StringBuilder sb = new StringBuilder();
+		        for (String database: databasesSize.keySet()) {
+		        sb.append(database);
+		        sb.append(';');
+		        }
+		        sb.append('\n');
+		        for (String tamanho: databasesSize.values()) {
+		        sb.append(tamanho);
+		        sb.append(';');
+
+
+		        }
+		        writer.write(sb.toString());
+		        writer.close();
+
+
+
+		    } catch (FileNotFoundException e) {
+		        System.out.println(e.getMessage());
+
+		    }
+		}
+	
 	public static void Writecsv(String chave, String valor) {
-//			 
+			 
 		try (PrintWriter writer = new PrintWriter(new File("tablesize.csv"))) {
 
 			StringBuilder sb = new StringBuilder();
@@ -528,6 +555,7 @@ public static void Writecsv_dbaIQ(HashMap<String, String> top10IOIntensiveQuerie
 			HashMap<String, String> tableSize = conx.getTableSizeFromAllDatabases();
 			System.out.println("\n\n=====================================================================================\n");
 			System.out.println("\n------- Database: " + database + " -------" + "\n\n");
+			Writecsv_dbaSize(databasesSize);
 			
 			// Métrica: Nome e Tamanho da Tabela
 			
