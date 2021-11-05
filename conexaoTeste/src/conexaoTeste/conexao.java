@@ -1,38 +1,49 @@
 package conexaoTeste;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class conexao {
-	
+
 	private Connection con;
-	
+
 	static Scanner sc = new Scanner(System.in);
 
-	/* private static String url = sc.next(); // "  jdbc:postgresql://localhost:5432/ ";
-   	private static String user = sc.next(); // "postgres";
-    private static String pass = sc.next(); // "34cas)*10"; */
-	
+	/*
+	 * private static String url = sc.next(); //
+	 * "  jdbc:postgresql://localhost:5432/ "; private static String user =
+	 * sc.next(); // "postgres"; private static String pass = sc.next(); //
+	 * "34cas)*10";
+	 */
+
 	public conexao(String databaseName) {
-		
-ArrayList<String> login = new ArrayList<String>();
-		
+
+		ArrayList<String> login = new ArrayList<String>();
+
 		String path = "login.txt";
-		
-		try (BufferedReader br = new BufferedReader(new FileReader(path))){
+
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			String line = br.readLine();
-			
+
 			while (line != null) {
-				//System.out.println(line);
+				// System.out.println(line);
 				line = br.readLine();
 				login.add(line);
 			}
@@ -40,24 +51,23 @@ ArrayList<String> login = new ArrayList<String>();
 			System.out.println("Erro: " + e);
 		}
 
-		//System.out.println(login);
-		
+		// System.out.println(login);
+
 		String url = login.get(0);
 		String user = login.get(1);
 		String pass = login.get(2);
-		
-		//System.out.println(url + user + pass);
-		
-		
+
+		// System.out.println(url + user + pass);
+
 		try {
 			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection(url + databaseName, user, pass);
-			//System.out.println("Banco conectado com sucesso!");
+			// System.out.println("Banco conectado com sucesso!");
 		} catch (Exception e) {
 			throw new Error("Houve um problema ao conectar no banco de dados!");
 		}
 	}
-	
+
 	private void closeConnection() {
 		try {
 			if (!this.con.isClosed()) {
@@ -67,330 +77,551 @@ ArrayList<String> login = new ArrayList<String>();
 			e.printStackTrace();
 		}
 	}
-	
-	// MÉTRICAS
-	
-	// Métrica: Nome e Tamanho do Banco
-	
+
+	// MÃ‰TRICAS
+
+	// MÃ©trica: Nome e Tamanho do Banco
+
 	private HashMap<String, String> getSizePerDatabase() {
 		HashMap<String, String> response = new HashMap<>();
-		
+
 		try {
 			String sql = "SELECT *, pg_database.datname, pg_size_pretty(pg_database_size(pg_database.datname)) AS size FROM pg_database WHERE datistemplate is False;";
 			PreparedStatement pesquisa = con.prepareStatement(sql);
-			
+
 			ResultSet result = pesquisa.executeQuery();
-			
-			while(result.next()) {
+
+			while (result.next()) {
 				response.put(result.getString("datname"), result.getString("size"));
 			}
 		} catch (Exception e) {
 			System.out.println("Houve um problema ao requisitar o tamanho dos bancos de dados!");
 		}
-		
+
 		return response;
 	}
-	
-	// Métrica: Nome e Tamanho da Tabela
-	
+
+	// MÃ©trica: Nome e Tamanho da Tabela
+
 	private HashMap<String, String> getTableSizeFromAllDatabases() {
 		HashMap<String, String> response = new HashMap<>();
-		
+
 		try {
 			String sql = "select table_schema, table_name, pg_relation_size('\"'||table_schema||'\".\"'||table_name||'\"')\r\n"
-					+ "from information_schema.tables\r\n"
-					+ "where table_schema NOT IN (\r\n"
-					+ "	'pg_catalog',\r\n"
-					+ "    'information_schema'\r\n"
-					+ ")\r\n"
-					+ "order by pg_relation_size DESC";
-			
+					+ "from information_schema.tables\r\n" + "where table_schema NOT IN (\r\n" + "	'pg_catalog',\r\n"
+					+ "    'information_schema'\r\n" + ")\r\n" + "order by pg_relation_size DESC";
+
 			PreparedStatement pesquisa = con.prepareStatement(sql);
-			
+
 			ResultSet result = pesquisa.executeQuery();
-			
-			while(result.next()) {
+
+			while (result.next()) {
 				response.put(result.getString("table_name"), result.getString("pg_relation_size"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Houve um problema ao requisitar o tamanho das tabelas de todos os banco de dados!");
 		}
-		
+
 		return response;
 	}
-	
-	// Métrica: Data e Hora de Criação do Banco
-	
+
+	// MÃ©trica: Data e Hora de CriaÃ§Ã£o do Banco
+
 	private HashMap<String, String> getUpTimeDatabase() {
 		HashMap<String, String> response = new HashMap<>();
-		
+
 		try {
 			String sql = "SELECT date_trunc('second', current_timestamp - pg_postmaster_start_time()), pg_postmaster_start_time() as uptime;";
-			
+
 			PreparedStatement pesquisa = con.prepareStatement(sql);
-			
+
 			ResultSet result = pesquisa.executeQuery();
-			 
-			while(result.next()) {
+
+			while (result.next()) {
 				response.put(result.getString("date_trunc"), result.getString("uptime"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Houve um problema ao requisitar o tamanho das tabelas de todos os banco de dados!");
 		}
-		
+
 		return response;
 	}
-	
-	// Métrica: 5 Querys Mais Rápidas do Servidor
-	
+
+	// MÃ©trica: 5 Querys Mais RÃ¡pidas do Servidor
+
 	private HashMap<String, String> getTop5QuickQuery() {
 		HashMap<String, String> response = new HashMap<>();
-		
+
 		try {
 			String sql = "SELECT (total_exec_time / 1000 / 60) as total_minutes, query FROM pg_stat_statements ORDER BY  (total_exec_time / 1000 / 60) asc LIMIT 5";
-			
+
 			PreparedStatement pesquisa = con.prepareStatement(sql);
-			
+
 			ResultSet result = pesquisa.executeQuery();
-			 
-			while(result.next()) {
+
+			while (result.next()) {
 				response.put(result.getString("total_minutes"), result.getString("query"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Houve um problema ao requisitar as queries com menor tempo de execução de todos os banco de dados!");
+			System.out.println(
+					"Houve um problema ao requisitar as queries com menor tempo de execuÃ§Ã£o de todos os banco de dados!");
 		}
-		
+
 		return response;
 	}
-	
-	// Métrica: 5 Querys Mais Lentas do Servidor
-	
+
+	// MÃ©trica: 5 Querys Mais Lentas do Servidor
+
 	private HashMap<String, String> getTop5SlowestQueries() {
 		HashMap<String, String> response = new HashMap<>();
-		
+
 		try {
 			String sql = "SELECT (total_exec_time / 1000 / 60) as total_minutes, query FROM pg_stat_statements ORDER BY  (total_exec_time / 1000 / 60) desc LIMIT 5";
-			
+
 			PreparedStatement pesquisa = con.prepareStatement(sql);
-			
+
 			ResultSet result = pesquisa.executeQuery();
-			 
-			while(result.next()) {
+
+			while (result.next()) {
 				response.put(result.getString("total_minutes"), result.getString("query"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Houve um problema ao requisitar as queries com maior tempo de execução de todos os banco de dados!");
+			System.out.println(
+					"Houve um problema ao requisitar as queries com maior tempo de execuÃ§Ã£o de todos os banco de dados!");
 		}
-		
+
 		return response;
 	}
-	
-	// Métrica: Status Geral do Backend
-	
+
+	// MÃ©trica: Status Geral do Backend
+
 	private HashMap<String, String> getQueryConnection() {
 		HashMap<String, String> response = new HashMap<>();
-		
+
 		try {
 			String sql = "SELECT datname, state from pg_stat_activity WHERE datname is not null;";
-			
+
 			PreparedStatement pesquisa = con.prepareStatement(sql);
-			
+
 			ResultSet result = pesquisa.executeQuery();
-			 
-			while(result.next()) {
+
+			while (result.next()) {
 				response.put(result.getString("datname"), result.getString("state"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Houve um problema ao requisitar status geral do backend");
 		}
-		
+
 		return response;
 	}
-	
-	// Métrica: Número de DeadLocks do Banco 
-	
-		private HashMap<String, String> getDeadlocksNumber() {
-			HashMap<String, String> response = new HashMap<>();
-			
-			try {
-				String sql = "SELECT datname, deadlocks from pg_stat_database where datname is not null;";
-				
-				PreparedStatement pesquisa = con.prepareStatement(sql);
-				
-				ResultSet result = pesquisa.executeQuery();
-				 
-				while(result.next()) {
-					response.put(result.getString("datname"), result.getString("deadlocks"));
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("Houve um problema ao requisitar número de deadLocks do banco");
+
+	// MÃ©trica: NÃºmero de DeadLocks do Banco
+
+	private HashMap<String, String> getDeadlocksNumber() {
+		HashMap<String, String> response = new HashMap<>();
+
+		try {
+			String sql = "SELECT datname, deadlocks from pg_stat_database where datname is not null;";
+
+			PreparedStatement pesquisa = con.prepareStatement(sql);
+
+			ResultSet result = pesquisa.executeQuery();
+
+			while (result.next()) {
+				response.put(result.getString("datname"), result.getString("deadlocks"));
 			}
-			
-			return response;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Houve um problema ao requisitar nÃºmero de deadLocks do banco");
 		}
-	
-	// Métrica: Queries Que Mais Consomem Espaço Temporário no Servidor
-	
-		private HashMap<String, String> getTop10ConsumersTemporarySpace() {
-			HashMap<String, String> response = new HashMap<>();
-			
-			try {
-				String sql = "select userid::regrole, query from pg_stat_statements order by temp_blks_written desc limit 10;";
-				
-				PreparedStatement pesquisa = con.prepareStatement(sql);
-				
-				ResultSet result = pesquisa.executeQuery();
-				 
-				while(result.next()) {
-					response.put(result.getString("userid"), result.getString("query"));
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("Houve um problema ao requisitar as queries que mais consomem espaço temporário no servidor");
+
+		return response;
+
+	}
+
+	// MÃ©trica: Queries Que Mais Consomem EspaÃ§o TemporÃ¡rio no Servidor
+
+	private HashMap<String, String> getTop10ConsumersTemporarySpace() {
+		HashMap<String, String> response = new HashMap<>();
+
+		try {
+			String sql = "select userid::regrole, query from pg_stat_statements order by temp_blks_written desc limit 10;";
+
+			PreparedStatement pesquisa = con.prepareStatement(sql);
+
+			ResultSet result = pesquisa.executeQuery();
+
+			while (result.next()) {
+				response.put(result.getString("userid"), result.getString("query"));
 			}
-			
-			return response;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(
+					"Houve um problema ao requisitar as queries que mais consomem espaÃ§o temporÃ¡rio no servidor");
 		}
-			
-	// Métrica: Otimização de Operações de Entrada/Saída no Servidor
 
-		private HashMap<String, String> getTop10IOIntensiveQueries() {
-	        HashMap<String, String> response = new HashMap<>();
+		return response;
+	}
 
-	        try {
-	            String sql = "select userid::regrole, dbid, query\r\n" + 
-	                    "    from pg_stat_statements\r\n" + 
-	                    "    order by (blk_read_time+blk_write_time)/calls desc\r\n" + 
-	                    "    limit 10;";
+	// MÃ©trica: OtimizaÃ§Ã£o de OperaÃ§Ãµes de Entrada/SaÃ­da no Servidor
 
-	            PreparedStatement pesquisa = con.prepareStatement(sql);
+	private HashMap<String, String> getTop10IOIntensiveQueries() {
+		HashMap<String, String> response = new HashMap<>();
 
-	            ResultSet result = pesquisa.executeQuery();
+		try {
+			String sql = "select userid::regrole, dbid, query\r\n" + "    from pg_stat_statements\r\n"
+					+ "    order by (blk_read_time+blk_write_time)/calls desc\r\n" + "    limit 10;";
 
-	            while(result.next()) {
-	                response.put(result.getString("userid"), result.getString("query"));
-	            }
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            System.out.println("Houve um problema ao requisitar a otimização de operações de Entrada/Saída");
-	        }
+			PreparedStatement pesquisa = con.prepareStatement(sql);
 
-	        return response;
-	    }
-			
-	// INTERFACE
+			ResultSet result = pesquisa.executeQuery();
+
+			while (result.next()) {
+				response.put(result.getString("userid"), result.getString("query"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Houve um problema ao requisitar a otimizaÃ§Ã£o de operaÃ§Ãµes de Entrada/SaÃ­da");
+		}
+
+		return response;
+	}
+
+	// CriaÃ§Ã£o dos CSVs
 	
+	public static void Writecsv(String chave, String valor) {
+//			 
+		try (PrintWriter writer = new PrintWriter(new File("tablesize.csv"))) {
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(chave);
+			sb.append(';');
+			sb.append(valor);
+			sb.append('\n');
+
+			writer.write(sb.toString());
+			writer.close();
+
+			
+
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+
+		}
+	}
+
+	public static void Writecsv_dbaUptime(HashMap<String, String> upTimeDataBase) {
+		 
+	try (PrintWriter writer = new PrintWriter(new File("uptime.csv"))) {
+
+		StringBuilder sb = new StringBuilder();
+		for (String database: upTimeDataBase.keySet()) {
+		sb.append(database);
+		sb.append(';');
+		}
+		sb.append('\n');
+		for (String tempo : upTimeDataBase.values()) {
+		sb.append(tempo);
+		sb.append(';');
+	
+		
+		}
+		writer.write(sb.toString());
+		writer.close();
+
+		
+
+	} catch (FileNotFoundException e) {
+		System.out.println(e.getMessage());
+
+	}
+}
+	
+	public static void Writecsv_dbdeadlocks(HashMap<String, String> getdeadlocksNumber) {
+		 
+	try (PrintWriter writer = new PrintWriter(new File("deadlocks.csv"))) {
+
+		StringBuilder sb = new StringBuilder();
+		for (String numero: getdeadlocksNumber.keySet()) {
+		sb.append(numero);
+		sb.append(';');
+		}
+		sb.append('\n');
+		for (String database : getdeadlocksNumber.values()) {
+		
+		sb.append(database);
+		sb.append(';');
+		
+		
+		}
+		writer.write(sb.toString());
+		writer.close();
+
+		
+
+	} catch (FileNotFoundException e) {
+		System.out.println(e.getMessage());
+
+	}
+}
+	public static void Writecsv_dbalowest(HashMap<String, String> top5SlowestQueries) {
+//		 
+	try (PrintWriter writer = new PrintWriter(new File("lowest.csv"))) {
+
+		StringBuilder sb = new StringBuilder();
+		for (String velocidade: top5SlowestQueries.keySet()) {
+		sb.append(velocidade);
+		sb.append(';');
+		}
+		sb.append('\n');
+		for (String queries : top5SlowestQueries.values()) {
+		sb.append(queries);
+		sb.append(';');
+	
+		
+		}
+		writer.write(sb.toString());
+		writer.close();
+
+		
+
+	} catch (FileNotFoundException e) {
+		System.out.println(e.getMessage());
+
+	}
+}
+
+public static void Writecsv_dbaTemporarySpace(HashMap<String, String> top10ConsumersTemporarySpace) {
+		 
+	try (PrintWriter writer = new PrintWriter(new File("temporaryspace.csv"))) {
+
+		StringBuilder sb = new StringBuilder();
+		for (String user: top10ConsumersTemporarySpace.keySet()) {
+		sb.append(user);
+		sb.append(';');
+		
+		}
+		sb.append('\n');
+		for (String queries : top10ConsumersTemporarySpace.values()) {
+		
+		sb.append(queries);
+		sb.append(';');
+	
+		
+		}
+		writer.write(sb.toString());
+		writer.close();
+
+		
+
+	} catch (FileNotFoundException e) {
+		System.out.println(e.getMessage());
+
+	}
+}
+
+public static void Writecsv_QCon(HashMap<String, String> queryConnection) {
+
+	try (PrintWriter writer = new PrintWriter(new File("QConnection.csv"))) {
+
+		StringBuilder sb = new StringBuilder();
+		for (String banco : queryConnection.keySet()) {
+			sb.append(banco);
+			sb.append(';');
+		}
+		sb.append('\n');
+		
+		for (String status : queryConnection.values()) {
+			sb.append(status);
+			sb.append(';');
+			
+		}
+		writer.write(sb.toString());
+		writer.close();
+
+	} catch (FileNotFoundException e) {
+		System.out.println(e.getMessage());
+
+	}
+}
+
+public static void Writecsv_QFast(HashMap<String, String> top5QuickQuery) {
+
+	try (PrintWriter writer = new PrintWriter(new File("quickquery.csv"))) {
+
+		StringBuilder sb = new StringBuilder();
+		for (String velocidade :top5QuickQuery.keySet()) {
+			sb.append(velocidade);
+			sb.append(';');
+			
+		}
+		sb.append('\n');
+		for (String query : top5QuickQuery.values()) {
+			sb.append(query);
+			sb.append(';');
+
+		}
+		writer.write(sb.toString());
+		writer.close();
+
+	} catch (FileNotFoundException e) {
+		System.out.println(e.getMessage());
+
+	}
+}
+
+public static void Writecsv_dbaIQ(HashMap<String, String> top10IOIntensiveQueries) {
+
+	try (PrintWriter writer = new PrintWriter(new File("intensiveQueries.csv"))) {
+
+		StringBuilder sb = new StringBuilder();
+		for (String user_id :top10IOIntensiveQueries.keySet()) {
+			sb.append(user_id);
+			sb.append(';');
+		}
+		sb.append('\n');
+		for (String query : top10IOIntensiveQueries.values()) {
+			sb.append(query);
+			sb.append(';');
+
+		}
+		writer.write(sb.toString());
+		writer.close();
+
+	} catch (FileNotFoundException e) {
+		System.out.println(e.getMessage());
+
+	}
+}
+
+
 	public static void main(String[] args) {
 		conexao con = new conexao("postgres");
 	
-		// Interfaces Fora do Laço de Repetição
+		// Interfaces Fora do LaÃ§o de RepetiÃ§Ã£o
 		
-		HashMap<String, String> databasesSize = con.getSizePerDatabase();
+		HashMap<String, String> databasesSize = con.getSizePerDatabase(); 
 		HashMap<String, String> upTimeDataBase = con.getUpTimeDatabase();
 		HashMap<String, String> queryConnection = con.getQueryConnection();
 		HashMap<String, String> getdeadlocksNumber = con.getDeadlocksNumber();
 		HashMap<String, String> top5QuickQuery = con.getTop5QuickQuery();
-		HashMap<String, String> top5SlowestQueries = con.getTop5SlowestQueries();
+		HashMap<String, String> top5SlowestQueries = con.getTop5SlowestQueries(); 
 		HashMap<String, String> top10ConsumersTemporarySpace = con.getTop10ConsumersTemporarySpace();
 		HashMap<String, String> top10IOIntensiveQueries = con.getTop10IOIntensiveQueries();
 		
-		// Laço de Repetição
+		
+
+	
+		// LaÃ§o de RepetiÃ§Ã£o
 
 		for (String database : databasesSize.keySet()) {
 			conexao conx = new conexao(database);
 		
-			// Métrica: Nome do Banco
+			// MÃ©trica: Nome do Banco
 			
 			HashMap<String, String> tableSize = conx.getTableSizeFromAllDatabases();
 			System.out.println("\n\n=====================================================================================\n");
 			System.out.println("\n------- Database: " + database + " -------" + "\n\n");
 			
-			// Métrica: Nome e Tamanho da Tabela
+			// MÃ©trica: Nome e Tamanho da Tabela
 			
 			tableSize.entrySet().stream().forEach(e -> {
 				System.out.println("Nome: " + e.getKey() + " | tamanho: " + e.getValue() + "\r");
+				Writecsv(e.getKey(),e.getValue());
+				
 			});
 			
 			if (tableSize.isEmpty()) {
 				System.out.println("Nenhuma tabela encontrada");
+				
+				
 			}
 				
 			conx.closeConnection();
 			
 		}
 		
-				// Interfaces Fora do Laço de Repetição
+				// Interfaces Fora do LaÃ§o de RepetiÃ§Ã£o
 				
-				// Métrica: Status Geral do Backend
+				// MÃ©trica: Status Geral do Backend
 				
 				System.out.println("\n\n=====================================================================================\n");
 				System.out.println("\n------- Status geral do backend -------\n\n");
 				
 				queryConnection.entrySet().stream().forEach(e -> {
 					System.out.println("Banco: " + e.getKey() + " | Status: " + e.getValue());
+					Writecsv_QCon(queryConnection);
 				});
 				
-				// Métrica: Número de DeadLocks do Banco
+				// MÃ©trica: NÃºmero de DeadLocks do Banco
 				
 				System.out.println("\n\n=====================================================================================\n");
-				System.out.println("\n------- Número de DeadLocks -------\n\n");
+				System.out.println("\n------- NÃºmero de DeadLocks -------\n\n");
 				
 				getdeadlocksNumber.entrySet().stream().forEach(e -> {
-					System.out.println("Número de DeadLocks: " + e.getValue() + " | Banco: " + e.getKey());
+					System.out.println("NÃºmero de DeadLocks: " + e.getValue() + " | Banco: " + e.getKey());
+					Writecsv_dbdeadlocks(getdeadlocksNumber);
 				});
 				
-				// Métrica: Data e Hora de Criação do Banco
+				// MÃ©trica: Data e Hora de CriaÃ§Ã£o do Banco
 				
 				System.out.println("\n\n=====================================================================================\n");
 				System.out.println("Tamanho de cada banco: " + databasesSize + "\n");
 				System.out.println("Tempo ativo do banco: " + upTimeDataBase);
+				Writecsv_dbaUptime(upTimeDataBase);
 				
-				
-				// Métrica: Queries Que Mais Consomem Espaço Temporário no Servidor
+				// MÃ©trica: Queries Que Mais Consomem EspaÃ§o TemporÃ¡rio no Servidor
 				System.out.println("\n\n=====================================================================================\n");
-				System.out.println("------- Queries que Mais Consomem Espaço Temporário no Servidor -------\n\n");
-
+				System.out.println("------- Queries que Mais Consomem EspaÃ§o TemporÃ¡rio no Servidor -------\n\n");
+				
 				top10ConsumersTemporarySpace.entrySet().stream().forEach(e -> {
 					System.out.println("User: " + e.getKey() + " | Query: " + e.getValue());
 					System.out.println("  ");
+					Writecsv_dbaTemporarySpace(top10ConsumersTemporarySpace);
+					
+					
 				});
 				
-				// Métrica: Otimização de Operações de Entrada/Saída no Servidor
+				// MÃ©trica: OtimizaÃ§Ã£o de OperaÃ§Ãµes de Entrada/SaÃ­da no Servidor
 				
 				System.out.println("\n\n=====================================================================================\n");
-	            System.out.println("------- Otimização de Operações de Entrada/Saída no Servidor -------\n\n");
+	            System.out.println("------- OtimizaÃ§Ã£o de OperaÃ§Ãµes de Entrada/SaÃ­da no Servidor -------\n\n");
 	            
 	            top10IOIntensiveQueries.entrySet().stream().forEach(e -> {
-	                System.out.println("User id: " + e.getKey() + " | Query: " + e.getValue());
+	                System.out.println("User id: " + e.getKey() + " | Query: " + e.getValue());               
 	                System.out.println("  ");
+	                Writecsv_dbaIQ(top10IOIntensiveQueries);
 	            });
 				
-				// Métrica Lenta
+				// MÃ©trica RÃ¡pidas
 				
 				System.out.println("\n\n=====================================================================================\n");
-				System.out.println("------- Tempo de execução das 5 queries mais rápidas -------\n\n");
+				System.out.println("------- Tempo de execuÃ§Ã£o das 5 queries mais rÃ¡pidas -------\n\n");
 
 				top5QuickQuery.entrySet().stream().forEach(e -> {
 					System.out.println("Velocidade: " + e.getKey() + " | Query: " + e.getValue());
 					System.out.println("\n___________________________________________________________________________________________________________________________________________________________________________________________________________\n");
 					System.out.println("  ");
+					Writecsv_QFast(top5QuickQuery);
 				});
 					
 					
-				// Métrica Rápida
+				// MÃ©trica Lentas
 				System.out.println("\n\n=====================================================================================\n");
-				System.out.println("------- Tempo de execução das 5 queries mais lentas -------\n\n");
+				System.out.println("------- Tempo de execuÃ§Ã£o das 5 queries mais lentas -------\n\n");
 
 				top5SlowestQueries.entrySet().stream().forEach(e -> {
 					System.out.println("Velocidade: " + e.getKey() + " | Query: " + e.getValue());
 					System.out.println("\n___________________________________________________________________________________________________________________________________________________________________________________________________________\n");
 					System.out.println("  ");
+					Writecsv_dbalowest(top5SlowestQueries);
+					
 				});
 	
 				sc.close();
