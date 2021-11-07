@@ -58,7 +58,9 @@ O **desafio** consiste em apresentar para o cliente Necto Systems, uma solução
 
 ## Product Backlog
 
+<p align="center">
 <img src="https://user-images.githubusercontent.com/80851038/133914854-06ddb253-92ad-4ed9-b1fe-47af41fb7c82.png"/>
+</p>
 
 <br>
 
@@ -77,14 +79,14 @@ Para mais informações sobre as entregas e sobre o conteúdo do projeto, veja c
 
 ## Tecnologias Utilizadas
 
-[Java](https://www.java.com/pt-BR/)
-| [JDBC](https://jdbc.postgresql.org/download.html)
-| [Eclipse](https://www.eclipse.org/)
-| [PostgreSQL](https://www.postgresql.org/)
-| [Figma](https://www.figma.com/)
-
-<img src="https://cdn.discordapp.com/attachments/888964389368131629/888965497868156968/tecnologiaas.png" alt="650" width="400"/>
-
+<p align="center">
+ <a href="https://www.java.com/pt-BR/"> Java</a> | <a href="https://jdbc.postgresql.org/download.html"> JDBC</a> | 
+ <a href="https://www.eclipse.org/downloads/">Eclipse </a> | <a href="https://www.postgresql.org/">PostgreSQL</a> | 
+ <a href="https://www.figma.com/">Figma</a>
+ <br>
+ <img src="https://cdn.discordapp.com/attachments/888964389368131629/888965497868156968/tecnologiaas.png" alt="650" width="400"/>
+</p>
+ 
 <br>
 
 ## Executando o programa 
