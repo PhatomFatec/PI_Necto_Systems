@@ -1,6 +1,5 @@
 # 🧩 Sprint 04
-**Situação:** ✅ Entregue - 28/11/2021 <br>
-
+**Situação:** ✅ Entregue - 28/11/2021 <br><br>
 
 ## 🗃️ Story Cards
 
