@@ -1,6 +1,8 @@
 # 🧩 Sprint 04
 **Situação:** ✅ Entregue - 28/11/2021 <br>
 
+<br>
+
 ## 🗃️ Story Cards
 
 | As (Como) | I Want (Eu quero) | So That (Para que) | Complexidade |
