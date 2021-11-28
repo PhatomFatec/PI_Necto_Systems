@@ -1,7 +1,7 @@
 
 	URL:
-jdbc:postgresql://localhost:5432/
+---
 	USER:
-postgres
+---
 	PASSWORD:
-phantom02s
+---
