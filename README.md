@@ -73,7 +73,7 @@ Para mais informações sobre as entregas e sobre o conteúdo do projeto, veja c
  
 - [x] [Sprint 03](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Sprints/Sprint03) ✔️
   
-- [x] [Sprint 04](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Sprints/Sprint04)
+- [x] [Sprint 04](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Sprints/Sprint04) ✔️
  
  <br>
 
