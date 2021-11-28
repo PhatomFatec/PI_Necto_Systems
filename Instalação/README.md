@@ -3,9 +3,6 @@
 ### Faça download do executável:
 
 Pelo [Github](https://github.com/PhatomFatec/PI_Necto_Systems/blob/main/executavel.zip)
-ou
-pelo [GoogleDrive](https://drive.google.com/file/d/1EYFtGIwhzP_WRzptxs-_Ska-zepZGa18/view?usp=sharing)
-
 
 ## Como executar:
 
