@@ -25,10 +25,13 @@
 | ------- | ------- | ------- | ------- |
 | Necto System | Arquivo executável | Não seja necessário executar a aplicação através de um IDE externo | 01/10
 
+<br>
 
 ## 📋 Backlog da Sprint
 
 ![image](https://user-images.githubusercontent.com/80851038/140666295-d1736e02-1cd0-4d4b-87e7-f4e5d1b1ddc5.png)
+
+<br>
 
 ## 📉 Gráfico BurnDown
 
