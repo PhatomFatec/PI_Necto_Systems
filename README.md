@@ -80,11 +80,11 @@ Para mais informações sobre as entregas e sobre o conteúdo do projeto, veja c
 ## Tecnologias Utilizadas
 
 <p align="center">
- <a href="https://www.java.com/pt-BR/"> Java</a> | <a href="https://jdbc.postgresql.org/download.html"> JDBC</a> | 
- <a href="https://www.eclipse.org/downloads/">Eclipse </a> | <a href="https://www.postgresql.org/">PostgreSQL</a> | 
- <a href="https://www.figma.com/">Figma</a>
+ <a href="https://www.postgresql.org/">PostgreSQL</a> | <a href="https://www.java.com/pt-BR/"> Java</a> | 
+ <a href="https://www.eclipse.org/downloads/">Eclipse </a> | <a href="https://jdbc.postgresql.org/download.html"> JDBC</a> |  
+ <a href="https://www.sqlite.org/index.html">SQLite</a>
  <br>
- <img src="https://cdn.discordapp.com/attachments/888964389368131629/888965497868156968/tecnologiaas.png" alt="650" width="400"/>
+ <img src="https://user-images.githubusercontent.com/80851038/144512470-23f9a330-02ea-4e61-aa7f-a8c42be2303a.png" alt="650" width="400"/>
 </p>
  
 <br>
