@@ -92,7 +92,7 @@ Para mais informações sobre as entregas e sobre o conteúdo do projeto, veja c
 ## Executando o programa 
 
 [Tutorial](https://github.com/PhatomFatec/PI_Necto_Systems/tree/main/Instala%C3%A7%C3%A3o)
-| Veja o passo a passo de como executar o programa. 
+| Veja o passo a passo de como executar o programa! 
 
 <br>
 
